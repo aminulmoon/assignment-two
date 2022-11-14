@@ -1,6 +1,8 @@
 .env
 
-Example to check are the text ignore to push in github:
+OPENAI_API_KEY = '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'
+
+Example text to check are the text ignore to push in github:
 
 
 
