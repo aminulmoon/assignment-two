@@ -6,8 +6,8 @@ Slug:
 Intro:
 
 Headings:
-What to know about wireless mouse
 Why wireless mouse is important
+What to know about wireless mouse
 What to look for in a wireless mouse before buy
 
 Conclusion:

@@ -4,7 +4,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 openai.api_key = os.getenv("OPENAI_API_KEY")
-
+key = 'wireless mouse'
 def intro_que(key):
   """
   This function will make a query to generate intro from OpenAi.
@@ -44,6 +44,40 @@ def conclusion_que(key):
   query = f'Write a conclusion on best {key}.'
   return query
 
+def paragraph_html(text):
+  """
+  This function will convert paragraph to HTML in Gutenberg formate.
+  """
+  code = f'<!-- wp:paragraph --><p>{text}</p><!-- /wp:paragraph -->'
+  return code
+
+
+def first_h2_html(key):
+  """
+  This function will convert H2 for Gutenberg.
+  """
+  code = f'<!-- wp:heading --><h2>Why {key} is important</h2><!-- /wp:heading -->'
+  return code.title()
+
+
+def second_h2_html(key):
+  """
+  This function will convert H2 for Gutenberg.
+  """
+  code = f'<!-- wp:heading --><h2>What to know about {key}</h2><!-- /wp:heading -->'
+  return code.title()
+
+
+def third_h2_html(key):
+  """
+  This function will convert H2 for Gutenberg.
+  """
+  code = f'<!-- wp:heading --><h2>What to look for in a {key} before buy</h2><!-- /wp:heading -->'
+  return code.title()
+
+
+title = f'Best {key} Buying Guide For 2023'
+slug = f'best {key}'
 
 def query_ans(text):
   """
@@ -63,11 +97,11 @@ def query_ans(text):
   data = response.get('choices')[0].get('text')
   return data
 
-intro_query = intro_que('wireless mouse')
-important_query = important_que('wireless mouse')
-what_know_query = what_know('wireless mouse')
+intro_query = intro_que(key)
+important_query = important_que(key)
+what_know_query = what_know(key)
 what_look_query = what_look(what_know)
-conclusion_query = conclusion_que('wireless mouse')
+conclusion_query = conclusion_que(key)
 
 
 introduction = query_ans(intro_query)
@@ -77,4 +111,16 @@ what_to_look = query_ans(what_look_query)
 conclusion = query_ans(conclusion_query)
 
 
-print(introduction)
+wp_title = title.title()
+wp_intro = paragraph_html(introduction)
+wp_first_h2 = first_h2_html(key)
+wp_why_important = paragraph_html(why_important)
+wp_second_h2 = second_h2_html(key)
+wp_what_to_know = paragraph_html(what_to_know)
+wp_third_h2 = third_h2_html(key)
+wp_what_to_look = paragraph_html(what_to_look)
+wp_conclusion_h2 = '<!-- wp:heading --><h2>Conclusion</h2><!-- /wp:heading -->'
+wp_conclusion = paragraph_html(conclusion)
+wp_slug = slug.strip().replace(' ','-')
+
+print(wp_slug)
